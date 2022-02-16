@@ -45,9 +45,7 @@
 
   <!-- compile all modules -->
   <target name="test" depends="compile">
-    <antcall target="template">
-      <param name="target" value="test" />
-    </antcall>
+
   </target>
 
   <!-- clean all modules -->
