@@ -10,6 +10,34 @@
     
   </target>
 
+  <target name="sonar" depends="test">
+    <!-- Import Sonar Ant tasks -->
+  
+
+    <!-- Execute Sonar -->
+    <sonar:sonar />
+  </target>
+
+  <!-- compile all modules -->
+  <target name="compile" depends="init">
+
+  </target>
+
+  <!-- compile all modules -->
+  <target name="test" depends="compile">
+
+  </target>
+
+  <!-- clean all modules -->
+  <target name="clean">
+    <delete dir=".sonar" />
+
+
+  </target>
+
+  <target name="all"
+          depends="clean,sonar" />
+
 
 
 </project>
