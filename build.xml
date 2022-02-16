@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="jacoco-modules" default="all" xmlns:sonar="antlib:org.sonar.ant">
+<project name="sonar-scanner-ant" default="all" xmlns:sonar="antlib:org.sonar.ant">
 
   <!-- initialization common to all modules -->
   <target name="global-init">
     <property name="base.dir" value="." />
-    <property name="src.dir" value="${base.dir}/src" />
-    <property name="build.dir" value="${base.dir}/target" />
-    <property name="classes.dir" value="${build.dir}/classes" />
-    <property name="reports.junit.dir" value="${build.dir}/junit" />
+    <property name="src.dir" value="src" />
+    <property name="build.dir" value="target" />
+    <property name="classes.dir" value="classes" />
+    
   </target>
 
   <target name="init" depends="global-init" />
@@ -24,43 +24,17 @@
 
   <!-- common way to compile sources -->
   <target name="compile-sources" depends="prepare">
-    <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="submodule.path" fork="true" debug="true" includeAntRuntime="false" />
-  </target>
-
-  <!-- common way to test -->
-  <target name="test-with-jacoco" depends="compile-sources">
-    <!-- Import JaCoCo Ant tasks -->
-    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-      <classpath path="../../ant-libs/JaCoCo/jacocoant.jar" />
-    </taskdef>
-
-    <jacoco:coverage destfile="target/jacoco.exec" xmlns:jacoco="antlib:org.jacoco.ant">
-      <junit fork="yes" dir="${basedir}">
-        <classpath location="${classes.dir}" />
-        <classpath refid="submodule.path" />
-
-        <formatter type="xml" />
-        <batchtest todir="${reports.junit.dir}">
-          <fileset dir="${src.dir}">
-            <include name="**/*Test.java" />
-          </fileset>
-        </batchtest>
-      </junit>
-    </jacoco:coverage>
+    <javac srcdir="src" destdir="classes.dir" classpathref="submodule.path" fork="true" debug="true" includeAntRuntime="false" />
   </target>
 
   <!-- Define Sonar Properties -->
-  <property name="sonar.projectKey" value="org.sonar.ant.tests.jacoco-modules:root" />
-  <property name="sonar.projectName" value="jacoco-modules" />
+  <property name="sonar.projectKey" value="sonar-scanner-ant" />
+  <property name="sonar.projectName" value="sonar-scanner-ant" />
   <property name="sonar.projectVersion" value="0.1-SNAPSHOT" />
   <property name="sonar.sources" value="src" />
   <property name="sonar.binaries" value="target/classes" />
-  <property name="sonar.dynamicAnalysis" value="reuseReports" />
-  <property name="sonar.junit.reportsPath" value="target/junit" />
-  <property name="sonar.core.codeCoveragePlugin" value="jacoco" />
-  <property name="sonar.modules" value="one,two" />
+
   <!-- Deprecated property needed for IT with Sonar 3.0 -->
-  <property name="sonar.surefire.reportsPath" value="target/junit" />
 
   <target name="sonar" depends="test">
     <!-- Import Sonar Ant tasks -->
