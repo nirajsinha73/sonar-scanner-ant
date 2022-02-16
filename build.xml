@@ -2,7 +2,7 @@
 <project name="sonar-scanner-ant" default="all" xmlns:sonar="antlib:org.sonar.ant">
 
   <!-- initialization common to all modules -->
-  <target name="global-init">
+
     <property name="base.dir" value="." />
     <property name="src.dir" value="src" />
     <property name="build.dir" value="target" />
