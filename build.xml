@@ -40,9 +40,7 @@
 
   <!-- compile all modules -->
   <target name="compile" depends="init">
-    <antcall target="template">
-      <param name="target" value="compile" />
-    </antcall>
+  
   </target>
 
   <!-- compile all modules -->
