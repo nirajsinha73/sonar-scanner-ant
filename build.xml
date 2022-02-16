@@ -14,13 +14,7 @@
 
   <target name="prepare" depends="init" />
 
-  <target name="template" depends="prepare">
-    <echo message="Executing '${target}' target for the module 'one'..."/>
-    <ant dir="one" target="${target}" />
-
-    <echo message="Executing '${target}' target for the module 'two'..."/>
-    <ant dir="two" target="${target}" />
-  </target>
+ 
 
   <!-- common way to compile sources -->
   <target name="compile-sources" depends="prepare">
@@ -62,9 +56,7 @@
   <target name="clean">
     <delete dir=".sonar" />
 
-    <antcall target="template">
-      <param name="target" value="clean" />
-    </antcall>
+
   </target>
 
   <target name="all"
